@@ -1,5 +1,5 @@
 import time
-from helper_list import LinkedList
+from bst_helper import BSTNode
 
 start_time = time.time()
 
@@ -11,12 +11,18 @@ f = open('names_2.txt', 'r')
 names_2 = f.read().split("\n")  # List containing 10000 names
 f.close()
 
-c = LinkedList()
-c.setList(names_1 + names_2)
-print(c.display())
 
-duplicates = [name for name in c.display()]  # Return the list of duplicates in this data structure
 
+duplicates = []  # Return the list of duplicates in this data structure
+
+bst = BSTNode(names_1[0])
+  
+for name in names_1:
+    bst.insert(name)
+
+for name in names_2:
+    if bst.contains(name):
+        duplicates.append(name)
 
 #Replace the nested for loops below with your improvements
 # for name_1 in names_1:
