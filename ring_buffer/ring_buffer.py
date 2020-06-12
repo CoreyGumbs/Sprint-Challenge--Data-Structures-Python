@@ -18,15 +18,14 @@ class RingBuffer:
         self.capacity = capacity
         self.head = None
         self.tail = None
-        self.length = 0
 
-    # def len(self):
-    #     count = 0
-    #     current_head = self.head
-    #     while(current_head):
-    #         count += 1
-    #         current_head = current_head.next_node
-    #     return count
+    def len(self):
+        count = 0
+        current_head = self.head
+        while(current_head):
+            count += 1
+            current_head = current_head.next_node
+        return count
 
     def append(self, item):
         new_node = Node(item, None);
@@ -35,8 +34,7 @@ class RingBuffer:
             self.head = new_node
             self.tail = new_node
         else:
-            if(self.length <= self.capacity):
-                self.length += 1
+            if(self.len() < self.capacity):
                 self.tail.set_next_node(new_node)
                 self.tail = new_node
             else:
@@ -56,13 +54,14 @@ class RingBuffer:
     
 
 
-a = RingBuffer(3);
+a = RingBuffer(5);
 a.append(1)
 a.append(2)
 a.append(3)
 a.append(4)
 a.append(5)
 a.append(6)
-
+print(a.capacity)
+print(a.len())
 print(a.get())
     
