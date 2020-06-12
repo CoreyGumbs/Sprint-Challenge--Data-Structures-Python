@@ -38,7 +38,9 @@ class RingBuffer:
                 self.tail.set_next_node(new_node)
                 self.tail = new_node
             else:
-                pass
+                current_head =  self.head
+                current_head.next_node = new_node
+                self.head = new_node
 
     def get(self):
         if not self.head:
