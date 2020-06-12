@@ -42,7 +42,7 @@ class LinkedList:
             current = self.head
             next_curr = current.next_node
             curr_list = []
-            while current.next_node is not None:
+            while current is not None:
                 curr_list.append(current.value)
                 current = current.next_node
         return curr_list

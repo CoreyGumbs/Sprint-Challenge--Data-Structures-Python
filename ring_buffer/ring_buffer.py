@@ -1,69 +1,19 @@
 
-class Node:
-    def __init__(self, value, next_node):
-        self.value = value 
-        self.next_node = next_node
-    
-    def get_value(self):
-        return self.value
-
-    def get_next_node(self):
-        return self.next_node
-    
-    def set_next_node(self, new_node):
-        self.next_node = new_node
         
 class RingBuffer:
     def __init__(self, capacity):
         self.capacity = capacity
-        self.head = None
-        self.tail = None
-
-    def len(self):
-        count = 0
-        current_head = self.head
-        while(current_head):
-            count += 1
-            current_head = current_head.next_node
-        return count
-
-    def append(self, item):
-        new_node = Node(item, None);
+        self.storage =  [None]*capacity
+        self.count = 0
         
-        if not self.head:
-            self.head = new_node
-            self.tail = new_node
-        else:
-            if(self.len() < self.capacity):
-                self.tail.set_next_node(new_node)
-                self.tail = new_node
-            else:
-                current_head =  self.head
-                current_head.next_node = new_node
-                self.head = new_node
-
+    def append(self, item):    
+        self.storage[self.count] = item
+        self.count += 1
+        
+        if self.count == self.capacity:
+            self.count = 0
+    
     def get(self):
-        if not self.head:
-            return None
-        else:
-            current = self.head
-            curr_list = []
-            while current:
-                curr_list.append(current.value)
-                current = current.next_node
-        return curr_list
-    
-    
-
-
-a = RingBuffer(5);
-a.append(1)
-a.append(2)
-a.append(3)
-a.append(4)
-a.append(5)
-a.append(6)
-print(a.capacity)
-print(a.len())
-print(a.get())
+        return self.storage
+ 
     
